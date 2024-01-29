@@ -1,6 +1,4 @@
 package tests;
-
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -8,7 +6,7 @@ import pages.GitHubPage;
 import utils.GitHubData;
 
 
-public class GitHubSomeTests extends BaseTest {
+public class GitHubPagesTest extends BaseTest {
     GitHubPage git = new GitHubPage();
     GitHubData data = new GitHubData();
 

@@ -1,10 +1,10 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
+
 import configs.WebDriverConfig;
 import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.BeforeAll;
 
 import java.util.Objects;
@@ -20,17 +20,12 @@ public class BaseTest {
         if (!"".equals(webDriverConfig.getRemoteWebDriver())) {
             Configuration.remote = webDriverConfig.getRemoteWebDriver();
         }
-        String baseUrlOfPage = System.getProperty("base.url");
-        if (Objects.isNull(baseUrlOfPage)) {
-            baseUrlOfPage = "https://github.com/";
+        String baseUrlPage = System.getProperty("baseUrl");
+        if (Objects.isNull(baseUrlPage)) {
+            baseUrlPage = "https://github.com/";
         }
         Configuration.browser = webDriverConfig.getBrowser();
         Configuration.browserVersion = webDriverConfig.getBrowserVersion();
-        open(baseUrlOfPage);
-    }
-
-    @AfterEach
-    void afterEach() {
-        Selenide.closeWebDriver();
+        open(baseUrlPage);
     }
 }
