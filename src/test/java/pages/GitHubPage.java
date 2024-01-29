@@ -17,11 +17,6 @@ public class GitHubPage {
             blogButton = $("[href='https://github.blog']"),
             blogTitleField = $(".d-flex.flex-items-center");
 
-    public GitHubPage openPage() {
-        Selenide.open("");
-        return this;
-    }
-
     public GitHubPage checkHomePageTitle(String title) {
         homePageTitleField.shouldHave(Condition.text(title));
         return this;
