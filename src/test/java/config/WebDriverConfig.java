@@ -27,4 +27,6 @@ public interface WebDriverConfig extends Config {
 
     @Key("remoteUrl")
     String remoteBrowserUrl();
+    @Key("pageLoadStr")
+    String getPageLoadStr();
 }

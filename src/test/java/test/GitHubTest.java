@@ -1,12 +1,10 @@
 package test;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import org.aeonbits.owner.Config;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -38,6 +36,4 @@ public class GitHubTest extends BaseTest {
         $(".readme-heading-1.readme-heading--condensed.mb-6").shouldHave(Condition.text("ReadMe Project"));
 
     }
-
-
 }

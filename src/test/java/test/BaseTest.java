@@ -1,4 +1,5 @@
 package test;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import config.WebDriverConfig;
@@ -19,14 +20,15 @@ public class BaseTest {
         Configuration.browserVersion = webDriverConfig.getBrowserVersion();
         Configuration.browser = webDriverConfig.getBrowser();
         if (webDriverConfig.isRemote() != null) {
-        Configuration.remote = webDriverConfig.remoteBrowserUrl();
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 10000;
+            Configuration.remote = webDriverConfig.remoteBrowserUrl();
+            Configuration.pageLoadStrategy = webDriverConfig.getPageLoadStr();
+
 
         }
     }
+
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         Selenide.open("");
     }
 
