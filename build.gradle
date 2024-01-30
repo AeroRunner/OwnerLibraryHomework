@@ -1,46 +1,41 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id "org.gradle.test-retry" version "1.5.8"
 }
 repositories {
     mavenCentral()
 }
-    compileTestJava {
-        options.encoding = 'UTF-8'
-    }
-    dependencies {
-        testImplementation(
-                "com.codeborne:selenide:6.19.1",
-                "org.junit.jupiter:junit-jupiter:5.8.2",
-                "org.slf4j:slf4j-simple:2.0.7",
-                "org.aeonbits.owner:owner:1.0.12",
-                "org.assertj:assertj-core:3.23.1",
-                "io.github.bonigarcia:webdrivermanager:5.6.3"
-        )
-    }
-    tasks.withType(Test) {
-        systemProperties(System.getProperties())
-        useJUnitPlatform()
+def selenideVersion = "6.19.1",
+    junitVersion = "5.10.0",
+    slf4jVersion = "2.0.7",
+    ownerVersion = "1.0.4"
 
-        testLogging {
-            lifecycle {
-                events "started", "skipped", "failed", "passed"
-                exceptionFormat "short"
-            }
+dependencies {
+    testImplementation(
+            "com.codeborne:selenide:$selenideVersion",
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion",
+            "org.aeonbits.owner:owner:$ownerVersion"
+    )
+}
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "passed"
+            exceptionFormat "short"
         }
     }
-
-task homeTest(type: Test) {
-    useJUnitPlatform {
-        includeTags("home")
-    }
 }
-task loginTest(type: Test) {
-    useJUnitPlatform {
-        includeTags("login")
+task owner_Test(type: Test) {
+    retry{
+        failOnPassedAfterRetry = true
+        maxFailures = 20
+        maxRetries = 20
     }
-}
-task blogTest(type: Test) {
     useJUnitPlatform {
-        includeTags("blog")
+        includeTags("homePage", "signInPage", "readMePage")
     }
 }
