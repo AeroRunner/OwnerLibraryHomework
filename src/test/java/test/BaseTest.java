@@ -16,19 +16,17 @@ public class BaseTest {
     public static void setUp() {
 
         Configuration.browserSize = webDriverConfig.getBrowserSize();
-        Configuration.baseUrl = webDriverConfig.getBaseUrl();
         Configuration.browserVersion = webDriverConfig.getBrowserVersion();
         Configuration.browser = webDriverConfig.getBrowser();
         if (webDriverConfig.isRemote() != null) {
             Configuration.remote = webDriverConfig.remoteBrowserUrl();
-            Configuration.pageLoadStrategy = webDriverConfig.getPageLoadStr();
-
-
         }
+        Configuration.pageLoadStrategy = webDriverConfig.getPageLoadStr();
     }
 
     @BeforeEach
     public void beforeEach() {
+        Configuration.baseUrl = webDriverConfig.getBaseUrl();
         Selenide.open("");
     }
 
